@@ -27,7 +27,7 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 		final long startTime = System.nanoTime();
 		HashCodeSolution res = null;
 		double sol = 0;
-		int iterations = 100;
+		int iterations = 200;
 		for(int i=0; i<iterations;i++) {
 			HashCodeSolution hashCodeSolution = graspLibrary.constructSolution(hashCodeInstance);
 			hashCodeSolution = graspBook.constructSolution(hashCodeSolution);
@@ -37,7 +37,7 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 			if(value>sol){
 				sol = value;
 				res = hashCodeSolution;
-//				System.out.println("Best found -> " + sol);
+				System.out.println("Best found -> " + sol);
 			}
 		}
 		long timeToSolution = TimeUnit.MILLISECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS);

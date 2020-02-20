@@ -23,7 +23,7 @@ public class Library {
     }
 
     public long getValue() {
-        return value;
+        return value/signUpTime*booksPerDay;
     }
 
     public int getId() {
