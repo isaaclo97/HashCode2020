@@ -10,6 +10,8 @@ import java.util.*;
 public class HashCodeSolution implements Solution {
 
     List<LibrarySolution> librerias = new ArrayList<>();
+    Set<Integer> librosElegidos = new HashSet<>();
+
     int currentDay = 0;
     private Double mark;
     private HashCodeInstance instance;
@@ -40,9 +42,11 @@ public class HashCodeSolution implements Solution {
         Library instanceLibrary;
         int submitDay;
         Set<Integer> chosenBooks = new HashSet<>();
+        Set<Integer> unusedBooks = new HashSet<>();
 
         public LibrarySolution(Library instanceLibrary, int submitDay) {
             this.instanceLibrary = instanceLibrary;
+            this.unusedBooks.addAll(instanceLibrary.getBooks());
             this.submitDay = submitDay;
         }
 
@@ -93,5 +97,15 @@ public class HashCodeSolution implements Solution {
 
     public List<LibrarySolution> getUsadasLibrerias() {
         return librerias;
+    }
+
+    public void sendBook(LibrarySolution library, int bookId){
+        if(library.chosenBooks.contains(bookId)){
+            throw new IllegalStateException("No deberia pasar nunca");
+        }
+
+        this.librosElegidos.add(bookId);
+        library.chosenBooks.add(bookId);
+        library.unusedBooks.remove(bookId);
     }
 }

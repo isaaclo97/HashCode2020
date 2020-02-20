@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 public class AlgConstructive implements Algorithm<HashCodeInstance> {
 
-	final Constructive<HashCodeInstance, HashCodeSolution> graspLibrary;
-	final Constructive<HashCodeInstance, HashCodeSolution> graspBook;
+	final GRASPLibrary graspLibrary;
+	final GRASPBook graspBook;
 
 	public AlgConstructive(GRASPLibrary graspLibrary, GRASPBook graspBook){
 		this.graspLibrary = graspLibrary;
@@ -25,7 +25,8 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 	public Result execute(HashCodeInstance hashCodeInstance){
 		// Compute the solution, and print the time to solution
 		final long startTime = System.nanoTime();
-		structure.HashCodeSolution hashCodeSolution = constructive.constructSolution(hashCodeInstance);
+		HashCodeSolution hashCodeSolution = graspLibrary.constructSolution(hashCodeInstance);
+		hashCodeSolution = graspBook.constructSolution(hashCodeSolution);
 		long timeToSolution = TimeUnit.MILLISECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS);
 		Result r = new Result(hashCodeInstance.getName());
 
