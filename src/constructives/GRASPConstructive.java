@@ -65,13 +65,25 @@ public class GRASPConstructive implements Constructive<structure.HashCodeInstanc
 
     public List<Candidate> generateCandidateList(HashCodeSolution solution){
         List<Candidate> list = new ArrayList<>();
-        // TODO Generate initial candidate list
+        //TODO: Add candidates to list
+        list.sort(Comparator.comparingInt(c1 -> c1.value));
         return list;
     }
 
     public int choseCandidate(List<Candidate> candidateList, double realAlpha){
         // Chose and return a candidate
-        return 0;
+        double gmin = candidateList.get(candidateList.size() - 1).value;
+        double gmax = candidateList.get(0).value;
+        double th = gmax - realAlpha * (gmax - gmin);
+        int limit = 0;
+
+        while (limit < candidateList.size() && candidateList.get(limit).value>= th) {
+            limit++;
+        }
+
+        Random rnd = new Random();
+
+        return candidateList.get(rnd.nextInt(limit)).value;
     }
 
     public List<Candidate> updateCandidateList(HashCodeSolution solution, List<Candidate> candidateList, int chosenIndex){
