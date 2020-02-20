@@ -108,4 +108,8 @@ public class HashCodeSolution implements Solution {
         library.chosenBooks.add(bookId);
         library.unusedBooks.remove(bookId);
     }
+
+    public boolean isUsedBook(int book){
+        return librosElegidos.contains(book);
+    }
 }
