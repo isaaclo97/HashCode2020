@@ -21,27 +21,23 @@ public class HashCodeInstance implements Instance {
 
         this.name = path.substring(path.lastIndexOf('\\') + 1);
         System.out.println("Reading instance: " + this.name);
-        FileReader fr= null;
         int nodeCnt = 0;
-        try {
-            fr = new FileReader(path);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        BufferedReader br=new BufferedReader(fr);
-        // read line by line
-        String line;
-        try{
+        try (FileReader fr = new FileReader(path);
+             BufferedReader br = new BufferedReader(fr);
+        ) {
+            // read line by line
+            String line;
             int index = 0;
             while ((line = br.readLine()) != null) {
                 String[] numbers = line.split("\t");
 
                 index++;
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        catch (IOException e){
-            e.printStackTrace();
-        }
+
+
     }
 
     public String getName() {
