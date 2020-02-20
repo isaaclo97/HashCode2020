@@ -107,6 +107,7 @@ public class HashCodeSolution implements Solution {
 
     public void addLibrary(Library library) {
         this.librerias.add(new LibrarySolution(library, this.currentDay));
+        this.unusedLibraries.remove(library);
         currentDay += library.getSignUpTime();
     }
 

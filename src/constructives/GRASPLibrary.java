@@ -1,7 +1,6 @@
 package constructives;
 
 import grafo.optilib.metaheuristics.Constructive;
-import grafo.optilib.tools.RandomManager;
 import structure.HashCodeInstance;
 import structure.HashCodeSolution;
 import structure.Library;
