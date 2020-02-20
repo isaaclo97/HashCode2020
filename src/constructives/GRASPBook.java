@@ -1,10 +1,7 @@
 package constructives;
 
-import grafo.optilib.metaheuristics.Constructive;
 import grafo.optilib.tools.RandomManager;
-import structure.HashCodeInstance;
 import structure.HashCodeSolution;
-import structure.Library;
 
 import java.util.ArrayList;
 import java.util.Comparator;

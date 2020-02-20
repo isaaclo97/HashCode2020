@@ -52,6 +52,6 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 
 	@Override
 	public String toString(){
-		return this.getClass().getSimpleName() + "(" + constructive + ")";
+		return this.getClass().getSimpleName() + "(huehue)";
 	}
 }
