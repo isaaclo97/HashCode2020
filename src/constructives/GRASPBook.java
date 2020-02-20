@@ -53,12 +53,16 @@ public class GRASPBook {
         } else realAlpha = alpha;
 
         for (HashCodeSolution.LibrarySolution libs : solution.getUsadasLibrerias()) {
+
+            int maxBooks = (solution.getInstance().getDays() - libs.getSubmitDay()) * libs.getInstanceLibrary().getBooksPerDay();
+            int counter = 0;
             List<Candidate> candidates = generateCandidateList(solution, libs);
-            while (!candidates.isEmpty()) {
+            while (!candidates.isEmpty() && counter < maxBooks) {
                 int chosenCandidate = choseCandidate(candidates, realAlpha);
                 Candidate candidate = candidates.get(chosenCandidate);
                 solution.sendBook(libs, candidate.book);
                 candidates = updateCandidateList(solution, libs, candidates, chosenCandidate);
+                counter++;
             }
         }
 
