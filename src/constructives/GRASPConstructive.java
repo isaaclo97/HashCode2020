@@ -1,11 +1,13 @@
 package constructives;
 
 import grafo.optilib.metaheuristics.Constructive;
-import grafo.optilib.tools.RandomManager;
 import structure.HashCodeInstance;
 import structure.HashCodeSolution;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 public class GRASPConstructive implements Constructive<structure.HashCodeInstance, structure.HashCodeSolution> {
 
@@ -46,7 +48,7 @@ public class GRASPConstructive implements Constructive<structure.HashCodeInstanc
 
         double realAlpha;
         if(this.alpha==-1) {
-            realAlpha=RandomManager.getRandom().nextDouble();
+            realAlpha=Math.random();
         } else realAlpha = alpha;
 
         HashCodeSolution solution = new HashCodeSolution(instance);

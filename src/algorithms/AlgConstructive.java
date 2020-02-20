@@ -29,19 +29,15 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 		double sol = 0;
 		int iterations = 100;
 		for(int i=0; i<iterations;i++) {
-			System.out.println("Iteration "+i+ " out of "+iterations);
 			HashCodeSolution hashCodeSolution = graspLibrary.constructSolution(hashCodeInstance);
 			hashCodeSolution = graspBook.constructSolution(hashCodeSolution);
 			double value = hashCodeSolution.getObjectiveFunctionValue();
+			System.out.println("Iteration " + i + " out of " + iterations + ". Value: " + value);
+
 			if(value>sol){
 				sol = value;
 				res = hashCodeSolution;
-				System.out.println("Best found -> " + sol);
-			}
-			else if(res==null){
-				sol = value;
-				res = hashCodeSolution;
-				System.out.println("Best found -> " + sol);
+//				System.out.println("Best found -> " + sol);
 			}
 		}
 		long timeToSolution = TimeUnit.MILLISECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS);
