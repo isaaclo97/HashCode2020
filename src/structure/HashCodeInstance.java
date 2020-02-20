@@ -2,16 +2,17 @@ package structure;
 
 import grafo.optilib.structure.Instance;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 public class HashCodeInstance implements Instance {
 
     private String name;
+    int nBooks, nLibraries, days;
+    int[] bookScore;
+    Library[] libraries;
 
     public HashCodeInstance(String path) {
         readInstance(path);
@@ -21,23 +22,37 @@ public class HashCodeInstance implements Instance {
 
         this.name = path.substring(path.lastIndexOf('\\') + 1);
         System.out.println("Reading instance: " + this.name);
-        int nodeCnt = 0;
-        try (FileReader fr = new FileReader(path);
-             BufferedReader br = new BufferedReader(fr);
+        try (Scanner sc = new Scanner(System.in)
         ) {
+
             // read line by line
-            String line;
-            int index = 0;
-            while ((line = br.readLine()) != null) {
-                String[] numbers = line.split("\t");
+            nBooks = sc.nextInt();
+            nLibraries = sc.nextInt();
+            days = sc.nextInt();
 
-                index++;
+            bookScore = new int[nBooks];
+            for (int i = 0; i < nBooks; i++) {
+                bookScore[i] = sc.nextInt();
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+            libraries = new Library[nLibraries];
+            for (int i = 0; i < nLibraries; i++) {
+                int nBooksLibrary = sc.nextInt();
+                int signUpTime = sc.nextInt();
+                int booksPerDay = sc.nextInt();
+
+                long score = 0;
+                Set<Integer> booksInLibrary = new HashSet<>();
+                for (int j = 0; j < nBooksLibrary; j++) {
+                    int book = sc.nextInt();
+                    booksInLibrary.add(book);
+                    score += bookScore[book];
+                }
+
+                libraries[i] = new Library(i, booksInLibrary, score, signUpTime, booksPerDay);
+            }
+
         }
-
-
     }
 
     public String getName() {
