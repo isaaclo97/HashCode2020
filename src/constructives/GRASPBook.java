@@ -52,7 +52,8 @@ public class GRASPBook {
 
         double realAlpha;
         if (this.alpha == -1) {
-            realAlpha = RandomManager.getRandom().nextDouble();
+            Random rnd = new Random();
+            realAlpha = rnd.nextDouble();
         } else realAlpha = alpha;
 
         for (HashCodeSolution.LibrarySolution libs : solution.getUsadasLibrerias()) {
