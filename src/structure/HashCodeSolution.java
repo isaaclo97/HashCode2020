@@ -36,7 +36,7 @@ public class HashCodeSolution implements Solution {
             value2 += instance.getBookScore(libro);
         }
 
-        if(value2 != value){
+        if (value2 != value) {
             throw new IllegalStateException("Panda subnormales");
         }
         return value;
@@ -75,16 +75,24 @@ public class HashCodeSolution implements Solution {
         }
     }
 
-    public void writeSolution(){
+    public void writeSolution() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.instance.getName() + ".sol"))) {
-            writer.append(String.format("%s\n", this.librerias.size()));
-            for(LibrarySolution librarySolution: librerias){
-                if(librarySolution.chosenBooks.isEmpty()){
+
+            int total = 0;
+            for (LibrarySolution librarySolution : librerias) {
+                if (!librarySolution.chosenBooks.isEmpty()) {
+                    total++;
+                }
+            }
+            writer.append(String.format("%s\n", total));
+
+            for (LibrarySolution librarySolution : librerias) {
+                if (librarySolution.chosenBooks.isEmpty()) {
                     continue;
                 }
                 writer.append(String.format("%s %s\n", librarySolution.instanceLibrary.id, librarySolution.chosenBooks.size()));
                 StringBuilder sb = new StringBuilder();
-                for(Integer bookId: librarySolution.chosenBooks){
+                for (Integer bookId : librarySolution.chosenBooks) {
                     sb.append(bookId).append(" ");
                 }
                 sb.deleteCharAt(sb.length() - 1);
@@ -97,12 +105,12 @@ public class HashCodeSolution implements Solution {
         }
     }
 
-    public void addLibrary(Library library){
+    public void addLibrary(Library library) {
         this.librerias.add(new LibrarySolution(library, this.currentDay));
         currentDay += library.getSignUpTime();
     }
 
-    public boolean canAddLibrary(Library library){
+    public boolean canAddLibrary(Library library) {
         return this.instance.getDays() - currentDay > library.getSignUpTime();
     }
 
@@ -114,8 +122,8 @@ public class HashCodeSolution implements Solution {
         return librerias;
     }
 
-    public void sendBook(LibrarySolution library, int bookId){
-        if(library.chosenBooks.contains(bookId)){
+    public void sendBook(LibrarySolution library, int bookId) {
+        if (library.chosenBooks.contains(bookId)) {
             throw new IllegalStateException("No deberia pasar nunca");
         }
 
@@ -124,7 +132,7 @@ public class HashCodeSolution implements Solution {
         library.unusedBooks.remove(bookId);
     }
 
-    public boolean isUsedBook(int book){
+    public boolean isUsedBook(int book) {
         return librosElegidos.contains(book);
     }
 }
