@@ -17,4 +17,24 @@ public class Library {
         this.signUpTime = signUpTime;
         this.booksPerDay = booksPerDay;
     }
+
+    public Set<Integer> getBooks() {
+        return books;
+    }
+
+    public long getValue() {
+        return value;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getSignUpTime() {
+        return signUpTime;
+    }
+
+    public int getBooksPerDay() {
+        return booksPerDay;
+    }
 }
