@@ -4,7 +4,6 @@ import grafo.optilib.structure.Instance;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;

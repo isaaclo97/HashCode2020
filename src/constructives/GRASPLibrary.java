@@ -15,7 +15,6 @@ public class GRASPLibrary implements Constructive<HashCodeInstance, HashCodeSolu
     public GRASPLibrary(double alpha){
         this.alpha = alpha;
     }
-    
 
     @SuppressWarnings("Duplicates")
     public HashCodeSolution constructSolution(HashCodeInstance instance) {
@@ -31,7 +30,7 @@ public class GRASPLibrary implements Constructive<HashCodeInstance, HashCodeSolu
             int chosenLibrary = choseLibrary(candidates, realAlpha);
             Library candidate = candidates.get(chosenLibrary);
 
-            // TODO Apply the changes to the solution, whatever we have to do
+            solution.addLibrary(candidate);
 
             candidates = updateLibraryList(solution, candidates, chosenLibrary);
         }
@@ -40,8 +39,13 @@ public class GRASPLibrary implements Constructive<HashCodeInstance, HashCodeSolu
     }
 
     public List<Library> generateLibraryList(HashCodeSolution solution){
-        Library[] libraries = solution.getInstance().getLibraries();
-        List<Library> list = new ArrayList<>(Arrays.asList(libraries));
+        Set<Library> libraries = solution.getUnusedLibraries();
+        List<Library> list = new ArrayList<>();
+        for (Library library : libraries) {
+            if(solution.canAddLibrary(library)){
+                list.add(library);
+            }
+        }
         list.sort(Comparator.comparingLong(Library::getValue));
         return list;
     }
