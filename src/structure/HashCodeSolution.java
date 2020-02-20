@@ -36,6 +36,10 @@ public class HashCodeSolution implements Solution {
         return this.mark;
     }
 
+    public HashCodeInstance getInstance() {
+        return instance;
+    }
+
     private static class LibrarySolution {
         Library instanceLibrary;
         int submitDay;

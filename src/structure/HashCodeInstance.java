@@ -62,4 +62,24 @@ public class HashCodeInstance implements Instance {
     public String getName() {
         return name;
     }
+
+    public int getnBooks() {
+        return nBooks;
+    }
+
+    public int getnLibraries() {
+        return nLibraries;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
+    public int[] getBookScore() {
+        return bookScore;
+    }
+
+    public Library[] getLibraries() {
+        return libraries;
+    }
 }
