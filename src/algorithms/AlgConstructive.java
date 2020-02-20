@@ -25,15 +25,30 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 	public Result execute(HashCodeInstance hashCodeInstance){
 		// Compute the solution, and print the time to solution
 		final long startTime = System.nanoTime();
-		HashCodeSolution hashCodeSolution = graspLibrary.constructSolution(hashCodeInstance);
-		hashCodeSolution = graspBook.constructSolution(hashCodeSolution);
+		HashCodeSolution res = null;
+		double sol = 0;
+		int iterations = 100;
+		for(int i=0; i<iterations;i++) {
+			System.out.println("Iteration "+i+ " out of "+iterations);
+			HashCodeSolution hashCodeSolution = graspLibrary.constructSolution(hashCodeInstance);
+			hashCodeSolution = graspBook.constructSolution(hashCodeSolution);
+			double value = hashCodeSolution.getObjectiveFunctionValue();
+			if(value>sol){
+				sol = value;
+				res = hashCodeSolution;
+			}
+			else if(res==null){
+				sol = value;
+				res = hashCodeSolution;
+			}
+		}
 		long timeToSolution = TimeUnit.MILLISECONDS.convert(System.nanoTime() - startTime, TimeUnit.NANOSECONDS);
 		Result r = new Result(hashCodeInstance.getName());
 
 		// Evaluate the solution quality
 		double seconds = timeToSolution / 1000.0;
 		System.out.println("Time (s): " + seconds);
-		System.out.println("Value: " + hashCodeSolution.getObjectiveFunctionValue());
+		System.out.println("Value: " + res.getObjectiveFunctionValue());
 
 		r.add("Time (s)", seconds);
 		//r.add("# Constructions", 1);
@@ -41,7 +56,7 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 		// Left this out because hashCode is not implemented in RP solution
 		// r.add("# Different Solutions", allSols.size());
 
-		r.add("# Global F.O Value", hashCodeSolution.getObjectiveFunctionValue());
+		r.add("# Global F.O Value", res.getObjectiveFunctionValue());
 
 		return r;
 	}
