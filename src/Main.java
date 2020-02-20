@@ -4,6 +4,8 @@ import constructives.GRASPConstructive;
 import grafo.optilib.metaheuristics.Algorithm;
 import grafo.optilib.metaheuristics.Constructive;
 import grafo.optilib.results.Experiment;
+import structure.HashCodeInstance;
+import structure.HashCodeInstanceFactory;
 
 import java.io.File;
 
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Main {
+
+    private static final String[] extensions = new String[]{".txt"};
 
     public static void main(String[] args) throws IOException {
 
@@ -24,24 +28,17 @@ public class Main {
 
         String date = String.format("%04d-%02d-%02d T%02d-%02d", year, month, day, hour, minute);
 
-        structure.HashCodeInstanceFactory factory = new structure.HashCodeInstanceFactory();
-
         String dir = ((args.length == 0) ? "instances" : (args[1] + "/"));
-//      String dir = ((args.length == 0) ? "instances/pruebas" : (args[1] + "/"));
         String outDir = "experiments/" + date;
         File outDirCreator = new File(outDir);
         outDirCreator.mkdirs();
-        String[] extensions = new String[]{".txt"};
 
-        ArrayList<Constructive<structure.HashCodeInstance, structure.HashCodeSolution>> constructives = new ArrayList<>();
-
-        ArrayList<Algorithm<structure.HashCodeInstance>> execution = new ArrayList<>();
-
+        ArrayList<Algorithm<HashCodeInstance>> execution = new ArrayList<>();
         execution.add(new AlgConstructiveGrasp(new GRASPConstructive(-1),100,"GRASP GRADO")); //0.25 0.75 0.5 -1 (valor de alpha aleatorio)
         execution.add(new AlgConstructive(new GRASPConstructive(-1))); //0.25 0.75 0.5 -1 (valor de alpha aleatorio)
 
+        HashCodeInstanceFactory factory = new HashCodeInstanceFactory();
         for (int i = 0; i < execution.size(); i++) {
-            //String outputFile = outDir+"/"+instanceSet+"_"+execution[i].toString()+".xlsx";
             String outputFile = outDir + "/" + execution.get(i).toString() + i +".xlsx";
             Experiment<structure.HashCodeInstance, structure.HashCodeInstanceFactory> experiment = new Experiment<>(execution.get(i), factory);
             experiment.launch(dir, outputFile, extensions);

@@ -9,13 +9,15 @@ import java.util.*;
 public class GRASPConstructive implements Constructive<structure.HashCodeInstance, structure.HashCodeSolution> {
 
     private Double alpha;
-    public GRASPConstructive( double alpha){
+    public GRASPConstructive(double alpha){
         this.alpha = alpha;
     }
 
-    class Candidate{
+    static class Candidate {
+
         private int node;
         private int value;
+
         Candidate(int node,int value){
             this.node = node;
             this.value = value;
@@ -38,16 +40,12 @@ public class GRASPConstructive implements Constructive<structure.HashCodeInstanc
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Candidate)) return false;
-            Candidate candidate = (Candidate) o;
-            return node == candidate.node &&
-                    Double.compare(candidate.value, value) == 0;
+            throw new RuntimeException("Not implemented");
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(node, value);
+            throw new RuntimeException("Not implemented");
         }
     }
 
@@ -66,7 +64,7 @@ public class GRASPConstructive implements Constructive<structure.HashCodeInstanc
         int node = 0;
         int sum = 0;
         int solution = 5;
-        CL.put(node,new Candidate(node,sum));
+        CL.put(node, new Candidate(node, sum));
         for(int i=0; i<solution ;i++){
             double gmin = Integer.MAX_VALUE;
             double gmax = 0;

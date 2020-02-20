@@ -2,10 +2,6 @@ package structure;
 
 import grafo.optilib.structure.Solution;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
-
 public class HashCodeSolution implements Solution {
 
     private Double mark;
