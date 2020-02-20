@@ -47,14 +47,13 @@ public class GRASPBook implements Constructive<HashCodeInstance, HashCodeSolutio
     }
 
     @SuppressWarnings("Duplicates")
-    public HashCodeSolution constructSolution(HashCodeInstance instance) {
+    public HashCodeSolution constructSolution(HashCodeSolution solution) {
 
         double realAlpha;
         if(this.alpha==-1) {
             realAlpha=RandomManager.getRandom().nextDouble();
         } else realAlpha = alpha;
 
-        HashCodeSolution solution = new HashCodeSolution(instance);
         List<Candidate> candidates = generateCandidateList(solution);
         while (!candidates.isEmpty()){
             int chosenCandidate = choseCandidate(candidates, realAlpha);

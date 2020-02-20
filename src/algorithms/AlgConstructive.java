@@ -1,5 +1,7 @@
 package algorithms;
 
+import constructives.GRASPBook;
+import constructives.GRASPLibrary;
 import grafo.optilib.metaheuristics.Algorithm;
 import grafo.optilib.metaheuristics.Constructive;
 import grafo.optilib.results.Result;
@@ -11,10 +13,12 @@ import java.util.concurrent.TimeUnit;
 
 public class AlgConstructive implements Algorithm<HashCodeInstance> {
 
-	final Constructive<HashCodeInstance, HashCodeSolution> constructive;
+	final Constructive<HashCodeInstance, HashCodeSolution> graspLibrary;
+	final Constructive<HashCodeInstance, HashCodeSolution> graspBook;
 
-	public AlgConstructive(Constructive<HashCodeInstance, HashCodeSolution> constructive){
-		this.constructive = constructive;
+	public AlgConstructive(GRASPLibrary graspLibrary, GRASPBook graspBook){
+		this.graspLibrary = graspLibrary;
+		this.graspBook = graspBook;
 	}
 
 	@Override

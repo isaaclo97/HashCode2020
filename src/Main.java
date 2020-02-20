@@ -33,7 +33,6 @@ public class Main {
 
         ArrayList<Algorithm<HashCodeInstance>> execution = new ArrayList<>();
         execution.add(new AlgConstructiveGrasp(new GRASPConstructive(-1),100,"GRASP GRADO")); //0.25 0.75 0.5 -1 (valor de alpha aleatorio)
-        execution.add(new AlgConstructive(new GRASPConstructive(-1))); //0.25 0.75 0.5 -1 (valor de alpha aleatorio)
 
         HashCodeInstanceFactory factory = new HashCodeInstanceFactory();
         for (int i = 0; i < execution.size(); i++) {
