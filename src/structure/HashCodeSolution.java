@@ -79,6 +79,9 @@ public class HashCodeSolution implements Solution {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.instance.getName() + ".sol"))) {
             writer.append(String.format("%s\n", this.librerias.size()));
             for(LibrarySolution librarySolution: librerias){
+                if(librarySolution.chosenBooks.isEmpty()){
+                    continue;
+                }
                 writer.append(String.format("%s %s\n", librarySolution.instanceLibrary.id, librarySolution.chosenBooks.size()));
                 StringBuilder sb = new StringBuilder();
                 for(Integer bookId: librarySolution.chosenBooks){

@@ -58,6 +58,7 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 
 		r.add("# Global F.O Value", res.getObjectiveFunctionValue());
 
+		hashCodeSolution.writeSolution();
 		return r;
 	}
 
