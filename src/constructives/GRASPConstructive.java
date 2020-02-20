@@ -71,7 +71,7 @@ public class GRASPConstructive implements Constructive<structure.HashCodeInstanc
 
     public int choseCandidate(List<Candidate> candidateList, double realAlpha){
         // Chose and return a candidate
-
+        return 0;
     }
 
     public List<Candidate> updateCandidateList(HashCodeSolution solution, List<Candidate> candidateList, int chosenIndex){

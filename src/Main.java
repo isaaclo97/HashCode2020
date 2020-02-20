@@ -2,13 +2,11 @@ import algorithms.AlgConstructive;
 import algorithms.AlgConstructiveGrasp;
 import constructives.GRASPConstructive;
 import grafo.optilib.metaheuristics.Algorithm;
-import grafo.optilib.metaheuristics.Constructive;
 import grafo.optilib.results.Experiment;
 import structure.HashCodeInstance;
 import structure.HashCodeInstanceFactory;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
