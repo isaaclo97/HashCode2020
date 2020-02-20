@@ -74,8 +74,8 @@ public class HashCodeInstance implements Instance {
         return days;
     }
 
-    public int[] getBookScore() {
-        return bookScore;
+    public int getBookScore(int chosenBook) {
+        return bookScore[chosenBook];
     }
 
     public Library[] getLibraries() {

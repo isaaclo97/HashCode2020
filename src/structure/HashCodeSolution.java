@@ -36,7 +36,7 @@ public class HashCodeSolution implements Solution {
         return instance;
     }
 
-    private static class LibrarySolution {
+    public static class LibrarySolution {
         Library instanceLibrary;
         int submitDay;
         Set<Integer> chosenBooks = new HashSet<>();
@@ -44,6 +44,18 @@ public class HashCodeSolution implements Solution {
         public LibrarySolution(Library instanceLibrary, int submitDay) {
             this.instanceLibrary = instanceLibrary;
             this.submitDay = submitDay;
+        }
+
+        public Library getInstanceLibrary() {
+            return instanceLibrary;
+        }
+
+        public int getSubmitDay() {
+            return submitDay;
+        }
+
+        public Set<Integer> getChosenBooks() {
+            return chosenBooks;
         }
     }
 
@@ -77,5 +89,9 @@ public class HashCodeSolution implements Solution {
 
     public Set<Library> getUnusedLibraries() {
         return unusedLibraries;
+    }
+
+    public List<LibrarySolution> getUsadasLibrerias() {
+        return librerias;
     }
 }

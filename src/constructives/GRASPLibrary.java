@@ -62,7 +62,6 @@ public class GRASPLibrary implements Constructive<HashCodeInstance, HashCodeSolu
         }
 
         Random rnd = new Random();
-
         return rnd.nextInt(limit);
     }
 

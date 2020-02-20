@@ -19,10 +19,12 @@ public class GRASPBook implements Constructive<HashCodeInstance, HashCodeSolutio
     }
 
     static class Candidate {
+        private int book;
         private int value;
 
         Candidate(int node,int value){
             this.value = value;
+            this.book = node;
         }
 
         public int getValue() {
@@ -68,7 +70,11 @@ public class GRASPBook implements Constructive<HashCodeInstance, HashCodeSolutio
 
     public List<Candidate> generateCandidateList(HashCodeSolution solution){
         List<Candidate> list = new ArrayList<>();
-
+        for (HashCodeSolution.LibrarySolution libs : solution.getUsadasLibrerias()) {
+            for (int chosenBook : libs.getChosenBooks()) {
+                list.add(new Candidate(chosenBook, solution.getInstance().getBookScore(chosenBook)));
+            }
+        }
         list.sort(Comparator.comparingInt(c1 -> c1.value));
         return list;
     }
