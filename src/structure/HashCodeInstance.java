@@ -2,6 +2,8 @@ package structure;
 
 import grafo.optilib.structure.Instance;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -22,7 +24,7 @@ public class HashCodeInstance implements Instance {
 
         this.name = path.substring(path.lastIndexOf('\\') + 1);
         System.out.println("Reading instance: " + this.name);
-        try (Scanner sc = new Scanner(System.in)
+        try (Scanner sc = new Scanner(new FileInputStream(path))
         ) {
 
             // read line by line
@@ -52,6 +54,8 @@ public class HashCodeInstance implements Instance {
                 libraries[i] = new Library(i, booksInLibrary, score, signUpTime, booksPerDay);
             }
 
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

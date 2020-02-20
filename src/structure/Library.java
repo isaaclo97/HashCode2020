@@ -11,6 +11,7 @@ public class Library {
     int booksPerDay;
 
     public Library(int id, Set<Integer> books, long value, int signUpTime, int booksPerDay) {
+        this.id = id;
         this.books = books;
         this.value = value;
         this.signUpTime = signUpTime;
