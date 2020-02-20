@@ -32,7 +32,7 @@ public class AlgConstructiveGrasp implements Algorithm<structure.HashCodeInstanc
 		for(int i=0; i<iterations;i++) {
 			System.out.println("Iteration "+i+ " out of "+iterations);
 			structure.HashCodeSolution hashCodeSolution = constructive.constructSolution(hashCodeInstance);
-			double value = hashCodeSolution.getMark();
+			double value = hashCodeSolution.getObjectiveFunctionValue();
 			if(value>sol){
 				sol = value;
 				res = hashCodeSolution;

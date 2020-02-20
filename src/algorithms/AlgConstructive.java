@@ -33,6 +33,7 @@ public class AlgConstructive implements Algorithm<HashCodeInstance> {
 		// Evaluate the solution quality
 		double seconds = timeToSolution / 1000.0;
 		System.out.println("Time (s): " + seconds);
+		System.out.println("Value: " + hashCodeSolution.getObjectiveFunctionValue());
 
 		r.add("Time (s)", seconds);
 		//r.add("# Constructions", 1);

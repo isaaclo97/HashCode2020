@@ -47,7 +47,7 @@ public class GRASPLibrary implements Constructive<HashCodeInstance, HashCodeSolu
                 list.add(library);
             }
         }
-        list.sort(Comparator.comparingLong(Library::getValue));
+        list.sort(Comparator.comparingLong(Library::getValue).reversed());
         return list;
     }
 

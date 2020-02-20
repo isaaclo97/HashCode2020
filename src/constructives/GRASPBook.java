@@ -1,6 +1,5 @@
 package constructives;
 
-import grafo.optilib.tools.RandomManager;
 import structure.HashCodeSolution;
 
 import java.util.ArrayList;
@@ -69,13 +68,13 @@ public class GRASPBook {
     public List<Candidate> generateCandidateList(HashCodeSolution solution, HashCodeSolution.LibrarySolution lib) {
         List<Candidate> list = new ArrayList<>();
 
-        for (int chosenBook : lib.getChosenBooks()) {
+        for (int chosenBook : lib.getUnusedBooks()) {
             if(!solution.isUsedBook(chosenBook)){
                 list.add(new Candidate(chosenBook, solution.getInstance().getBookScore(chosenBook)));
             }
         }
 
-        list.sort(Comparator.comparingInt(c1 -> c1.value));
+        list.sort(Comparator.comparingInt(Candidate::getValue).reversed());
         return list;
     }
 
@@ -92,7 +91,7 @@ public class GRASPBook {
 
         Random rnd = new Random();
 
-        return candidateList.get(rnd.nextInt(limit)).value;
+        return rnd.nextInt(limit);
     }
 
     public List<Candidate> updateCandidateList(HashCodeSolution solution, HashCodeSolution.LibrarySolution lib, List<Candidate> candidateList, int chosenIndex) {

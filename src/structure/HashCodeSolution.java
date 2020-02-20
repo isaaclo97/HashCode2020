@@ -13,7 +13,7 @@ public class HashCodeSolution implements Solution {
     Set<Integer> librosElegidos = new HashSet<>();
 
     int currentDay = 0;
-    private Double mark;
+    //private double objValue;
     private HashCodeInstance instance;
 
     Set<Library> unusedLibraries = new HashSet<>();
@@ -23,15 +23,23 @@ public class HashCodeSolution implements Solution {
         unusedLibraries.addAll(Arrays.asList(instance.getLibraries()));
     }
 
-    public Double getMark(){
-        return this.mark;
-    }
 
     public double getObjectiveFunctionValue() {
-        if(this.mark==null){
-            return this.mark = getMark();
+        long value = 0;
+        for (LibrarySolution libreria : librerias) {
+            for (Integer libro : libreria.chosenBooks) {
+                value += instance.getBookScore(libro);
+            }
         }
-        return this.mark;
+        long value2 = 0;
+        for (Integer libro : this.librosElegidos) {
+            value2 += instance.getBookScore(libro);
+        }
+
+        if(value2 != value){
+            throw new IllegalStateException("Panda subnormales");
+        }
+        return value;
     }
 
     public HashCodeInstance getInstance() {
@@ -60,6 +68,10 @@ public class HashCodeSolution implements Solution {
 
         public Set<Integer> getChosenBooks() {
             return chosenBooks;
+        }
+
+        public Set<Integer> getUnusedBooks() {
+            return unusedBooks;
         }
     }
 
