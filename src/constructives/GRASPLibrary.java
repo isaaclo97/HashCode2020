@@ -21,7 +21,8 @@ public class GRASPLibrary implements Constructive<HashCodeInstance, HashCodeSolu
 
         double realAlpha;
         if(this.alpha==-1) {
-            realAlpha=RandomManager.getRandom().nextDouble();
+            Random rnd = new Random();
+            realAlpha=rnd.nextDouble();
         } else realAlpha = alpha;
 
         HashCodeSolution solution = new HashCodeSolution(instance);
