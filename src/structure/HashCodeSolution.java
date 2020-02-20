@@ -23,6 +23,11 @@ public class HashCodeSolution implements Solution {
         unusedLibraries.addAll(Arrays.asList(instance.getLibraries()));
     }
 
+    public HashCodeSolution(HashCodeSolution sol) {
+        this.instance = sol.instance;
+        this.unusedLibraries = new HashSet<>(sol.unusedLibraries);
+    }
+
 
     public double getObjectiveFunctionValue() {
         long value = 0;
@@ -44,6 +49,10 @@ public class HashCodeSolution implements Solution {
 
     public HashCodeInstance getInstance() {
         return instance;
+    }
+
+    public void shuffleList() {
+        Collections.shuffle(librerias);
     }
 
     public static class LibrarySolution {
@@ -109,6 +118,9 @@ public class HashCodeSolution implements Solution {
         this.librerias.add(new LibrarySolution(library, this.currentDay));
         this.unusedLibraries.remove(library);
         currentDay += library.getSignUpTime();
+    }
+
+    public void removeLibrary(Library library){
     }
 
     public boolean canAddLibrary(Library library) {
