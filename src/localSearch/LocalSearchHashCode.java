@@ -10,21 +10,24 @@ import java.util.Random;
 public class LocalSearchHashCode {
 
     public HashCodeSolution improve(HashCodeSolution sol) {
-//        Random rnd = new Random();
+//      Random rnd = new Random();
         double actVal = sol.getObjectiveFunctionValue();
         boolean improved = true;
-        HashCodeSolution bestSol = sol;
+        HashCodeSolution bestSol = new HashCodeSolution(sol);
         while (improved){
             improved = false;
-            HashCodeSolution solCop = new HashCodeSolution(sol);
-            solCop.shuffleList();
-            double newPoint = solCop.getObjectiveFunctionValue();
-            if(Double.compare(newPoint, actVal) > 0){
-                actVal = newPoint;
-                bestSol = solCop;
-                improved = true;
+            for(int i=0; i<2;i++) {
+                HashCodeSolution solCop = new HashCodeSolution(sol);
+                solCop.shuffleList();
+                double newPoint = solCop.getObjectiveFunctionValue();
+                System.out.println(bestSol.getObjectiveFunctionValue()); //MODIFICA LA MEJOR REVISAR
+                if (Double.compare(newPoint, actVal) > 0) {
+                    actVal = newPoint;
+                    bestSol = new HashCodeSolution(solCop);
+                    improved = true;
+                    System.out.println("Mejorada en BL - " + actVal);
+                }
             }
-
         }
         return bestSol;
     }

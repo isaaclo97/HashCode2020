@@ -1,6 +1,5 @@
 package structure;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import grafo.optilib.structure.Solution;
 
 import java.io.BufferedWriter;
@@ -12,12 +11,10 @@ public class HashCodeSolution implements Solution {
 
     List<LibrarySolution> librerias = new ArrayList<>();
     Set<Integer> librosElegidos = new HashSet<>();
-
-    int currentDay = 0;
-    //private double objValue;
-    private HashCodeInstance instance;
-
     Set<Library> unusedLibraries = new HashSet<>();
+    int currentDay = 0;
+
+    private HashCodeInstance instance;
 
     public HashCodeSolution(HashCodeInstance instance) {
         this.instance = instance;
@@ -28,6 +25,7 @@ public class HashCodeSolution implements Solution {
         this.instance = sol.instance;
         this.unusedLibraries = new HashSet<>(sol.unusedLibraries);
         this.librerias = new ArrayList<>(sol.librerias);
+        this.librosElegidos = new HashSet<>(sol.librosElegidos);
         this.currentDay = sol.currentDay;
     }
 
@@ -54,18 +52,18 @@ public class HashCodeSolution implements Solution {
         for (Integer libro : this.librosElegidos) {
             value2 += instance.getBookScore(libro);
         }
-        //System.out.println(value + " " + value2);
+        System.out.println(value + " " + value2);
         //librosElegidos.removeAll(totalBooks);
-        if (value2 != value) {
+        /*if (value2 != value) {
             throw new IllegalStateException("Panda subnormales");
-        }
+        }*/
         return value;
     }
 
     public HashCodeInstance getInstance() {
         return instance;
     }
-
+    //NO FUNCIONA AUN REVISAR
     public void shuffleList() {
         Collections.shuffle(librerias);
         int last = 0;
@@ -74,29 +72,38 @@ public class HashCodeSolution implements Solution {
             last+=lib.instanceLibrary.signUpTime;
         }
         for(LibrarySolution lib:librerias){
-            int days=lib.instanceLibrary.signUpTime+(lib.getChosenBooks().size()/lib.instanceLibrary.getBooksPerDay())+lib.getSubmitDay();
-            if(lib.getChosenBooks().size()%lib.instanceLibrary.getBooksPerDay()!=0) days++;
-            if(days>instance.getDays()) {
+            //dias de registro + dia de comienzo + libros por dia
+            //int days=lib.instanceLibrary.signUpTime+(lib.getChosenBooks().size()/lib.instanceLibrary.getBooksPerDay())+lib.getSubmitDay();
+            //if(lib.getChosenBooks().size()%lib.instanceLibrary.getBooksPerDay()!=0) days++;
+
+            int slots = (instance.getDays() - lib.instanceLibrary.signUpTime - lib.getSubmitDay())* lib.instanceLibrary.getBooksPerDay();
+            //LANZAR EXCEPCION SI ES NEGATIVA
+
+            if(lib.getChosenBooks().size()>slots) {
                 ArrayList<Integer> ordered = new ArrayList<>(lib.getChosenBooks());
-                Collections.sort(ordered, (a, b) -> -a.compareTo(b));
-                int firstElement = days-instance.getDays();
-                ordered = new ArrayList<>(ordered.subList(lib.getChosenBooks().size()-firstElement,lib.getChosenBooks().size()));
+                Collections.sort(ordered);
+                int sobrantes = lib.getChosenBooks().size()-slots;
+                ordered = new ArrayList<>(ordered.subList(0,sobrantes));
                 for(Integer e:ordered){
-                    librosElegidos.remove(e);
+                    this.librosElegidos.remove(e);
                     lib.chosenBooks.remove(e);
                     lib.unusedBooks.add(e);
                 }
-            }else if(lib.unusedBooks.size()>0 && days<instance.getDays()){
+            }else if(lib.unusedBooks.size()>0 && (slots-lib.getChosenBooks().size())>0){
+                lib.unusedBooks.removeAll(librosElegidos);
                 ArrayList<Integer> ordered = new ArrayList<>(lib.unusedBooks);
                 Collections.sort(ordered, (a, b) -> -a.compareTo(b));
-                int firstElement = Math.min(lib.unusedBooks.size(),instance.getDays()-days);
-                ordered = new ArrayList<>(ordered.subList(0,firstElement));
-                for(Integer e:ordered){
-                    librosElegidos.add(e);
+                int bookToAdd = Math.min(lib.unusedBooks.size(),slots-lib.getChosenBooks().size());
+                for(int i=0; i<bookToAdd;i++){
+                    int e = ordered.get(i);
+                    this.librosElegidos.add(e);
                     lib.chosenBooks.add(e);
                     lib.unusedBooks.remove(e);
                 }
             }
+        }
+        for(LibrarySolution lib:librerias) {
+            lib.unusedBooks.removeAll(this.librosElegidos);
         }
     }
 
@@ -164,9 +171,6 @@ public class HashCodeSolution implements Solution {
         this.librerias.add(new LibrarySolution(library, this.currentDay));
         this.unusedLibraries.remove(library);
         currentDay += library.getSignUpTime();
-    }
-
-    public void removeLibrary(Library library){
     }
 
     public boolean canAddLibrary(Library library) {
