@@ -26,19 +26,27 @@ public class HashCodeSolution implements Solution {
 
     public double getObjectiveFunctionValue() {
         long value = 0;
+        int daysCounter = 0;
         for (LibrarySolution libreria : librerias) {
+            daysCounter+=libreria.instanceLibrary.signUpTime;
+            int daysLibrary = 0;
+            int cnt = 0;
             for (Integer libro : libreria.chosenBooks) {
+                if(cnt%libreria.getInstanceLibrary().booksPerDay==0) daysLibrary++;
+                if(daysCounter+daysLibrary>instance.days) break;
+                cnt++;
                 value += instance.getBookScore(libro);
             }
+            if(daysCounter>instance.days) break;
         }
-        long value2 = 0;
+        /*long value2 = 0;
         for (Integer libro : this.librosElegidos) {
             value2 += instance.getBookScore(libro);
         }
 
         if (value2 != value) {
             throw new IllegalStateException("Panda subnormales");
-        }
+        }*/
         return value;
     }
 
