@@ -54,7 +54,7 @@ public class GRASPBook {
 
         for (HashCodeSolution.LibrarySolution libs : solution.getUsadasLibrerias()) {
 
-            int maxBooks = (solution.getInstance().getDays() - libs.getSubmitDay()) * libs.getInstanceLibrary().getBooksPerDay();
+            int maxBooks = (solution.getInstance().getDays() - libs.getSubmitDay()-libs.getInstanceLibrary().getSignUpTime()) * libs.getInstanceLibrary().getBooksPerDay();
             int counter = 0;
             List<Candidate> candidates = generateCandidateList(solution, libs);
             while (!candidates.isEmpty() && counter < maxBooks) {
