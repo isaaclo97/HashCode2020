@@ -106,10 +106,10 @@ public class HashCodeSolution implements Solution {
             }
             int slots = (instance.getDays() - lib.instanceLibrary.signUpTime - lib.getSubmitDay())* lib.instanceLibrary.getBooksPerDay();
             if(slots<0){
-                throw new IllegalStateException("Panda subnormales");
+                slots=lib.getChosenBooks().size()+1; //En caso de ser negativo = overflow poner todos los libros posibles
             }
-            if(lib.getChosenBooks().size()>slots) {
-                int sobrantes = Math.max(0,lib.getChosenBooks().size()-slots);
+            if(lib.getChosenBooks().size()>slots && slots>0) {
+                int sobrantes = Math.max(0,lib.getChosenBooks().size()-(int)slots);
                 ArrayList<Integer> ordered = new ArrayList<>(lib.getChosenBooks());
                 Collections.sort(ordered);
                 ordered = new ArrayList<>(ordered.subList(0,sobrantes));
@@ -127,7 +127,7 @@ public class HashCodeSolution implements Solution {
             lib.unusedBooks.removeAll(this.librosElegidos);
             int slots = (instance.getDays() - lib.instanceLibrary.signUpTime - lib.getSubmitDay())* lib.instanceLibrary.getBooksPerDay();
             if(slots<0){
-                throw new IllegalStateException("Panda subnormales");
+                slots=lib.getChosenBooks().size()+1; //En caso de ser negativo = overflow poner todos los libros posibles
             }
             if(lib.unusedBooks.size()>0 && (slots-lib.getChosenBooks().size())>0){
                 ArrayList<Integer> ordered = new ArrayList<>(lib.unusedBooks);

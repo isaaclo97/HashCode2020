@@ -4,28 +4,30 @@ Heuristics solutions used to solve HashCode 2020
 
 Inputs  | Score
 ------- | -------
-A       | 
-B       | 
-C       | 
-D       | 
-E       | 
+A       | 21 
+B       | 5.822.900
+C       | 5.467.966
+D       | 4.820.855
+E       | 4.860.151
+F		| 5.038.803
 
 
-#### Total: 
+#### Total: 26.010.696
 
-#### World: /
-#### Spain: /
+#### World: 1384/10724
+#### Spain: 42/519
 
 
 ## Extended Round
 
 Inputs  | Score
 ------- | -------
-A       | 
-B       | 
-C       | 
-D       | 
-E       | 
+A       | 21
+B       | 5.822.900
+C       | 5.467.966
+D       | 5.027.945
+E       | 4.894.025
+F		| 5.194.858
 
 #### Total: 
 
