@@ -16,16 +16,15 @@ public class LocalSearchHashCode {
         HashCodeSolution bestSol = new HashCodeSolution(sol);
         while (improved){
             improved = false;
-            for(int i=0; i<2;i++) {
+            for(int i=0; i<100;i++) {
                 HashCodeSolution solCop = new HashCodeSolution(sol);
                 solCop.shuffleList();
                 double newPoint = solCop.getObjectiveFunctionValue();
-                System.out.println(bestSol.getObjectiveFunctionValue()); //MODIFICA LA MEJOR REVISAR
                 if (Double.compare(newPoint, actVal) > 0) {
                     actVal = newPoint;
                     bestSol = new HashCodeSolution(solCop);
                     improved = true;
-                    System.out.println("Mejorada en BL - " + actVal);
+                    //System.out.println("Mejorada en BL - " + actVal);
                 }
             }
         }
