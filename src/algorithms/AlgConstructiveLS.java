@@ -34,12 +34,12 @@ public class AlgConstructiveLS implements Algorithm<HashCodeInstance> {
 			double value = hashCodeSolution.getObjectiveFunctionValue();
 			System.out.println("Iteration " + i + " out of " + iterations + ". Value: " + value);
 			LocalSearchHashCode ls = new LocalSearchHashCode();
-			ls.improve(hashCodeSolution);
-			value = hashCodeSolution.getObjectiveFunctionValue();
+			HashCodeSolution hashCodeSolutionImprove = new HashCodeSolution(ls.improve(hashCodeSolution));
+			value = hashCodeSolutionImprove.getObjectiveFunctionValue();
 			System.out.println("Iteration BL " + i + " out of " + iterations + ". Value: " + value);
 			if(value>sol){
 				sol = value;
-				res = hashCodeSolution;
+				res = hashCodeSolutionImprove;
 				System.out.println("Best found -> " + sol);
 				res.writeSolution();
 			}
