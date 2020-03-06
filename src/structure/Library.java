@@ -1,5 +1,6 @@
 package structure;
 
+import java.util.Arrays;
 import java.util.Set;
 
 public class Library {
@@ -24,6 +25,7 @@ public class Library {
 
     public long getValue() {
         return value/signUpTime*booksPerDay;
+        //return -signUpTime; //C
     }
 
     public int getId() {
